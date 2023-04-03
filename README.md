@@ -165,7 +165,7 @@ final class HomeCoordinator: Coordinator<Void> {
 - The navigator type is checked and the navigation controller set (it uses the existing navigation controller for a push and creates a new one for the modal)
 - The relevant navigation logic is added. In this example, when the button is pressed, the secondary view controller will be navigated to via a push using the `coordinate(to: coordinator)` method.
 
-For a more advanced example please refer to the code in the repo.
+For a more **advanced** example please refer to the code in the repo.
 
 ## Root Coordinator
 
