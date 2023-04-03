@@ -97,7 +97,7 @@ class Coordinator<Result> {
 
 Here are some key points to note:
 - All subsequent coordinators are stored in an array
-- When the coordinator is deallocated, it will return an *Observable<Result>* and be removed from the array
+- When the coordinator is deallocated, it will return an `Observable<Result>` and be removed from the array
 - All coordinators should subclass this *Coordinator* class and override the *start* method
 
 ## Example
