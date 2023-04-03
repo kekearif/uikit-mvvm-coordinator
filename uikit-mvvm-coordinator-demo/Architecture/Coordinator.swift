@@ -33,12 +33,13 @@ class Coordinator<Result> {
     ///
     /// - Parameter coordinator: Coordinator to release.
     private func free<T>(coordinator: Coordinator<T>) {
+        print("releasing coordinator: \(coordinator)")
         childCoordinators[coordinator.identifier] = nil
     }
 
     /// 1. Stores coordinator in the dictionary of child coordinators.
     /// 2. Calls the coordinator's `start()` method.
-    /// 3. On the `onNext:` method of the returned observable from `start()` the coordinator is removed from the
+    /// 3. On the `onNext:` method of the returned observable from `start()`, the coordinator is removed from the
     ///    dictionary of child coordinators.
     ///
     /// - Parameter coordinator: Coordinator to start.

@@ -11,18 +11,18 @@ class CustomNC: UINavigationController {
 
     // MARK: - Initializers
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-
-        setupAppearance()
-    }
-
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
 
         setupAppearance()
     }
 
+    @available(*, unavailable)
+    private override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        fatalError("init(nibName:bundle:) has not been implemented")
+    }
+
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

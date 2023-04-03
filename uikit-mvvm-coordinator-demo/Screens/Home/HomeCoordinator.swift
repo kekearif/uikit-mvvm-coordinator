@@ -35,24 +35,30 @@ final class HomeCoordinator: Coordinator<Void> {
             navigator.navigate(to: vc)
         }
 
-        viewModel.event.pushButtonTapped
-            .observe(on: MainScheduler.instance)
-            .flatMapLatest { [weak self, weak nc] _ -> Observable<Void> in
+        let pushResult = viewModel.event.pushButtonTapped
+            .flatMapLatest { [weak self, weak nc] _ -> Observable<SecondaryCoordinator.Result> in
                 guard let self = self, let nc = nc else { return .empty() }
 
                 return self.pushSecondaryVC(from: nc)
             }
-            .subscribe()
-            .disposed(by: bag)
 
-        viewModel.event.presentButtonTapped
-            .observe(on: MainScheduler.instance)
-            .flatMapLatest { [weak self, weak vc] _ -> Observable<Void> in
+        let presentResult = viewModel.event.presentButtonTapped
+            .flatMapLatest { [weak self, weak vc] _ -> Observable<SecondaryCoordinator.Result> in
                 guard let self = self, let vc = vc else { return .empty() }
 
                 return self.presentSecondaryVC(from: vc)
             }
-            .subscribe()
+
+        Observable.merge(pushResult, presentResult)
+            .flatMapLatest { result -> Observable<String?> in
+                switch result {
+                case .textUpdated(let text):
+                    return .just(text)
+                case .cancel:
+                    return .empty()
+                }
+            }
+            .bind(to: viewModel.message)
             .disposed(by: bag)
 
         return vc.rx.deallocated
@@ -60,13 +66,17 @@ final class HomeCoordinator: Coordinator<Void> {
 
     // MARK: - Navigation
 
-    private func pushSecondaryVC(from navigationController: UINavigationController) -> Observable<Void> {
+    private func pushSecondaryVC(
+        from navigationController: UINavigationController
+    ) -> Observable<SecondaryCoordinator.Result> {
         let coordinator = SecondaryCoordinator(navigator: .push(to: navigationController))
 
         return coordinate(to: coordinator)
     }
 
-    private func presentSecondaryVC(from viewController: UIViewController) -> Observable<Void> {
+    private func presentSecondaryVC(
+        from viewController: UIViewController
+    ) -> Observable<SecondaryCoordinator.Result> {
         let coordinator = SecondaryCoordinator(navigator: .modal(from: viewController))
 
         return coordinate(to: coordinator)

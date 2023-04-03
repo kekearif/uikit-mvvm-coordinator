@@ -8,7 +8,12 @@
 import UIKit
 import RxSwift
 
-final class SecondaryCoordinator: Coordinator<Void> {
+final class SecondaryCoordinator: Coordinator<SecondaryCoordinator.Result> {
+
+    enum Result {
+        case textUpdated(String?)
+        case cancel
+    }
 
     // MARK: - Properties
 
@@ -20,7 +25,7 @@ final class SecondaryCoordinator: Coordinator<Void> {
         self.navigator = navigator
     }
 
-    override func start() -> Observable<Void> {
+    override func start() -> Observable<Result> {
         let viewModel = SecondaryViewModel()
         let vc = SecondaryVC(viewModel: viewModel)
 
@@ -35,7 +40,25 @@ final class SecondaryCoordinator: Coordinator<Void> {
             navigator.navigate(to: vc)
         }
 
-        return vc.rx.deallocated
+        let result = viewModel.event.updateButtonTapped
+            .observe(on: MainScheduler.instance)
+            .do(onNext: { [weak vc, weak nc, weak self] _ in
+                guard let vc = vc, let nc = nc, let self = self else { return }
+                switch self.navigator {
+                case .modal, .root:
+                    vc.dismiss(animated: true)
+                case .push:
+                    nc.popViewController(animated: true)
+                }
+            })
+            .map { Result.textUpdated($0) }
+
+        return Observable
+            .merge(
+                result,
+                vc.rx.deallocated.map { _ in .cancel }
+            )
+            .take(1)
     }
 
 }

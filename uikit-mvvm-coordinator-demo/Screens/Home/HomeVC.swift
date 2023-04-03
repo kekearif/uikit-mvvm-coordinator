@@ -54,15 +54,18 @@ final class HomeVC: UIViewController {
         view.backgroundColor = .white
         title = viewModel.title
 
+        let label = UILabel()
+        label.textAlignment = .center
+
         let pushButton = UIButton()
-        pushButton.setTitle("Push", for: .normal)
+        pushButton.setTitle("Push Secondary", for: .normal)
         pushButton.setTitleColor(.blue, for: .normal)
 
         let presentButton = UIButton()
-        presentButton.setTitle("Present", for: .normal)
+        presentButton.setTitle("Present Secondary", for: .normal)
         presentButton.setTitleColor(.blue, for: .normal)
 
-        let stackView = UIStackView(arrangedSubviews: [pushButton, presentButton])
+        let stackView = UIStackView(arrangedSubviews: [label, pushButton, presentButton])
         stackView.axis = .vertical
 
         view.addSubview(stackView)
@@ -70,6 +73,10 @@ final class HomeVC: UIViewController {
             $0.center.equalToSuperview()
             $0.leading.greaterThanOrEqualToSuperview()
         }
+
+        viewModel.state.message
+            .drive(label.rx.text)
+            .disposed(by: bag)
 
         pushButton.rx.tap
             .bind(to: viewModel.event.pushButtonTapped)
