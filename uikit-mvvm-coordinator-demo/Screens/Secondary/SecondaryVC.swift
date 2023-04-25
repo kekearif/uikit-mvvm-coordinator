@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-final class SecondaryVC: UIViewController {
+final class SecondaryVC: ViewController {
 
     // MARK: - Properties
 

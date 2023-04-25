@@ -27,6 +27,7 @@
 		A856D8FF29D73644004FCE3A /* SecondaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A856D8FE29D73644004FCE3A /* SecondaryViewModel.swift */; };
 		A856D90129D74575004FCE3A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A856D90029D74575004FCE3A /* HomeViewModel.swift */; };
 		A856D90329D74924004FCE3A /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A856D90229D74924004FCE3A /* HomeCoordinator.swift */; };
+		A8C4AE7729F7DD4D0028753C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C4AE7629F7DD4D0028753C /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		A856D8FE29D73644004FCE3A /* SecondaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryViewModel.swift; sourceTree = "<group>"; };
 		A856D90029D74575004FCE3A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A856D90229D74924004FCE3A /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		A8C4AE7629F7DD4D0028753C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 			children = (
 				A856D8ED29D721ED004FCE3A /* Coordinator.swift */,
 				A856D8FC29D735FD004FCE3A /* Navigator.swift */,
+				A8C4AE7629F7DD4D0028753C /* ViewController.swift */,
 			);
 			path = Architecture;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				A856D90129D74575004FCE3A /* HomeViewModel.swift in Sources */,
 				A856D8B329D720CC004FCE3A /* AppDelegate.swift in Sources */,
 				A856D8FF29D73644004FCE3A /* SecondaryViewModel.swift in Sources */,
+				A8C4AE7729F7DD4D0028753C /* ViewController.swift in Sources */,
 				A856D8FB29D735A8004FCE3A /* SecondaryCoordinator.swift in Sources */,
 				A856D8FD29D735FD004FCE3A /* Navigator.swift in Sources */,
 				A856D8B529D720CC004FCE3A /* SceneDelegate.swift in Sources */,

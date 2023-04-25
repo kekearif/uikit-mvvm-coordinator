@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-final class HomeVC: UIViewController {
+final class HomeVC: ViewController {
 
     // MARK: - Properties
 
